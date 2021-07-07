@@ -1,0 +1,48 @@
+{
+	"compilerOptions": {
+		// required
+		"allowSyntheticDefaultImports": true,
+		"downlevelIteration": true,
+		"module": "commonjs",
+		"moduleResolution": "Node",
+		"noLib": true,
+		"strict": true,
+		"target": "ESNext",
+		"skipLibCheck": true,
+		"typeRoots": [
+			"node_modules/@rbxts"
+		],
+		// required, configurable
+		"rootDir": "src",
+		"outDir": "out",
+		// optional
+		"baseUrl": "src",
+		"declaration": false,
+		// optional, non-configurable
+		"jsx": "react",
+		"jsxFactory": "Roact.createElement",
+		//Incremental build stuffs
+		"incremental": true,
+		"tsBuildInfoFile": "out/tsconfig.tsbuildinfo",
+		//
+		"experimentalDecorators": true,
+		//Plugins
+		"plugins": [
+			{
+				"name": "roblox-ts-extensions",
+				// All the following fields are optional and will use their defaults if omitted.
+				"client": [
+					"src/client"
+				],
+				"server": [
+					"src/server"
+				],
+				"mode": "prefix",
+				//"useRojo": true
+			},
+			{
+				"transform": "rbxts-transformer-flamework"
+			}
+		],
+	}
+}
