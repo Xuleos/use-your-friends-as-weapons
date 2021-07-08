@@ -5461,61 +5461,7 @@ return { t = t }
       <Properties>
         <string name="Name">TS</string>
       </Properties>
-      <Item class="Folder" referent="28">
-        <Properties>
-          <string name="Name">components</string>
-        </Properties>
-        <Item class="ModuleScript" referent="29">
-          <Properties>
-            <string name="Name">Fire</string>
-            <string name="Source"><![CDATA[-- Compiled with roblox-ts v1.1.1-dev.aaf8b2f
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local t_1 = TS.import(script, TS.getModule(script, "@rbxts", "t").lib.ts).t
-local Flamework_1 = TS.import(script, TS.getModule(script, "@rbxts", "flamework").out).Flamework
-local BaseComponent = TS.import(script, TS.getModule(script, "@rbxts", "flamework").out).BaseComponent
-local Fire
-do
-	local super = BaseComponent
-	Fire = setmetatable({}, {
-		__tostring = function()
-			return "Fire"
-		end,
-		__index = super,
-	})
-	Fire.__index = Fire
-	function Fire.new(...)
-		local self = setmetatable({}, Fire)
-		return self:constructor(...) or self
-	end
-	function Fire:constructor(...)
-		super.constructor(self, ...)
-	end
-	function Fire:onStart()
-	end
-end
-Flamework_1.registerMetadata(Fire, {
-	identifier = "KQ",
-	isExternal = false,
-	decorators = { {
-		identifier = "@rbxts/flamework:out/flamework@Component",
-		config = {
-			type = "Component",
-			tag = "fire",
-			attributes = {
-				myAttribute = t_1.string,
-			},
-		},
-	} },
-	implements = { "$:4R" },
-})
-return {
-	Fire = Fire,
-}
-]]></string>
-          </Properties>
-        </Item>
-      </Item>
-      <Item class="Script" referent="30">
+      <Item class="Script" referent="28">
         <Properties>
           <string name="Name">main</string>
           <string name="Source"><![CDATA[-- Compiled with roblox-ts v1.1.1-dev.aaf8b2f
@@ -5526,83 +5472,27 @@ Flamework.ignite()
 ]]></string>
         </Properties>
       </Item>
-      <Item class="Folder" referent="31">
-        <Properties>
-          <string name="Name">services</string>
-        </Properties>
-        <Item class="ModuleScript" referent="32">
-          <Properties>
-            <string name="Name">ComponentQuery</string>
-            <string name="Source"><![CDATA[-- Compiled with roblox-ts v1.1.1-dev.aaf8b2f
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Flamework_1 = TS.import(script, TS.getModule(script, "@rbxts", "flamework").out).Flamework
-local ReplicatedStorage = TS.import(script, TS.getModule(script, "@rbxts", "services")).ReplicatedStorage
-local components = Flamework_1.resolveDependency("$:p2")
-local ComponentQuery
-do
-	ComponentQuery = setmetatable({}, {
-		__tostring = function()
-			return "ComponentQuery"
-		end,
-	})
-	ComponentQuery.__index = ComponentQuery
-	function ComponentQuery.new(...)
-		local self = setmetatable({}, ComponentQuery)
-		return self:constructor(...) or self
-	end
-	function ComponentQuery:constructor()
-	end
-	function ComponentQuery:onInit()
-		local g = components:getComponent(ReplicatedStorage, "KQ")
-		print(g.attributes.myAttribute)
-	end
-	function ComponentQuery:onStart()
-	end
-end
-Flamework_1.registerMetadata(ComponentQuery, {
-	identifier = "VM",
-	isExternal = false,
-	decorators = { {
-		identifier = "$:dz",
-		config = {
-			type = "Service",
-		},
-	} },
-	implements = { "$:4R", "$:7w" },
-})
-return {
-	ComponentQuery = ComponentQuery,
-}
-]]></string>
-          </Properties>
-        </Item>
-      </Item>
     </Item>
   </Item>
-  <Item class="SoundService" referent="33">
+  <Item class="SoundService" referent="29">
     <Properties>
       <string name="Name">SoundService</string>
       <bool name="RespectFilteringEnabled">true</bool>
     </Properties>
   </Item>
-  <Item class="StarterPlayer" referent="34">
+  <Item class="StarterPlayer" referent="30">
     <Properties>
       <string name="Name">StarterPlayer</string>
     </Properties>
-    <Item class="StarterPlayerScripts" referent="35">
+    <Item class="StarterPlayerScripts" referent="31">
       <Properties>
         <string name="Name">StarterPlayerScripts</string>
       </Properties>
-      <Item class="Folder" referent="36">
+      <Item class="Folder" referent="32">
         <Properties>
           <string name="Name">TS</string>
         </Properties>
-        <Item class="Folder" referent="37">
-          <Properties>
-            <string name="Name">controllers</string>
-          </Properties>
-        </Item>
-        <Item class="LocalScript" referent="38">
+        <Item class="LocalScript" referent="33">
           <Properties>
             <string name="Name">main</string>
             <string name="Source"><![CDATA[-- Compiled with roblox-ts v1.1.1-dev.aaf8b2f
@@ -5616,7 +5506,7 @@ Flamework.ignite()
       </Item>
     </Item>
   </Item>
-  <Item class="Workspace" referent="39">
+  <Item class="Workspace" referent="34">
     <Properties>
       <string name="Name">Workspace</string>
       <bool name="FilteringEnabled">true</bool>
