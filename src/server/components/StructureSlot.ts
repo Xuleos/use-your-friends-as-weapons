@@ -48,4 +48,10 @@ export class StructureSlot extends BaseComponent<Attributes> implements OnStart 
 	getOccupier() {
 		return this.occupiedBy?.Value;
 	}
+
+	setOccupier(occupier: Player | Model) {
+		if (this.occupiedBy) {
+			this.occupiedBy.Value = occupier;
+		}
+	}
 }
