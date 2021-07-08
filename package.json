@@ -30,6 +30,9 @@
     },
     "dependencies": {
         "@rbxts/flamework": "^0.0.10",
-        "@rbxts/services": "^1.1.5"
+        "@rbxts/log": "^0.3.0-alpha.1",
+        "@rbxts/services": "^1.1.5",
+        "@rbxts/zircon": "^0.8.0-beta.0",
+        "rbxts-transform-debug": "^0.6.1"
     }
 }

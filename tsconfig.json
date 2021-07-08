@@ -42,6 +42,9 @@
 			},
 			{
 				"transform": "rbxts-transformer-flamework"
+			},
+			{
+				"transform": "rbxts-transform-debug"
 			}
 		],
 	}
