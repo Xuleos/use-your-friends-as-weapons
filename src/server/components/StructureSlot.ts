@@ -42,7 +42,26 @@ export class StructureSlot extends BaseComponent<Attributes, Model | Part | Atta
 		return this.attributes.occupiedBy;
 	}
 
-	setOccupier(occupier: Player | Model) {
+	setOccupier(occupier?: Player | Model) {
+		if (occupier === undefined) {
+			if (this.attributes.occupiedBy === undefined) {
+				return;
+			}
+
+			const currentOccupying = idService.getInstanceFromId(this.attributes.occupiedBy);
+			if (!currentOccupying) {
+				Log.Warn("No id for currently occupying");
+				return;
+			}
+
+			const canOccupySlot = components.getComponent<CanOccupySlot>(currentOccupying);
+			canOccupySlot.setOccupying(undefined);
+
+			this.instance.SetAttribute("occupiedBy", undefined);
+
+			return;
+		}
+
 		const id = idService.getIdFromInstance(occupier);
 
 		if (id !== undefined) {
