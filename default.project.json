@@ -36,7 +36,8 @@
 		"Workspace": {
 			"$className": "Workspace",
 			"$properties": {
-				"FilteringEnabled": true
+				"FilteringEnabled": true,
+				"MeshPartHeadsAndAccessories": "Disabled"
 			},
 			"$ignoreUnknownInstances": true,
 			"$path": "assets/workspace"
