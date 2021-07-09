@@ -5,13 +5,14 @@ import Remotes from "shared/Remotes";
 import Log from "@rbxts/log";
 import StructureSlotConfig from "shared/consts/StructureSlotConfig";
 import { StructureSlot } from "server/components/StructureSlot";
+import { $dbg } from "rbxts-transform-debug";
 
 const components = Dependency<Components>();
 
 const undeterminedPositionTemplate = "Position for the slot {Slot} could not be determined";
 
 @Service({})
-export class StructureSlotInteraction implements OnStart {
+export class SlotInteractionService implements OnStart {
 	private interactWithStructureSlot = Remotes.Server.Create("interactWithStructureSlot");
 
 	onStart() {
