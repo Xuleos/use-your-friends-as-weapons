@@ -37,7 +37,9 @@
 			"$className": "Workspace",
 			"$properties": {
 				"FilteringEnabled": true
-			}
+			},
+			"$ignoreUnknownInstances": true,
+			"$path": "assets/workspace"
 		},
 		"HttpService": {
 			"$className": "HttpService",
