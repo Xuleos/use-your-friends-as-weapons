@@ -5,7 +5,6 @@ import Remotes from "shared/Remotes";
 import Log from "@rbxts/log";
 import StructureSlotConfig from "shared/consts/StructureSlotConfig";
 import { StructureSlot } from "server/components/StructureSlot";
-import { $dbg } from "rbxts-transform-debug";
 
 const components = Dependency<Components>();
 

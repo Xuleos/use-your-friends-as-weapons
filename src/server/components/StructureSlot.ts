@@ -1,11 +1,15 @@
 import { Component, BaseComponent, OnStart, Dependency, Components } from "@rbxts/flamework";
+import Log from "@rbxts/log";
 import { CollectionService } from "@rbxts/services";
+import { IdService } from "server/services/IdService";
+import { CanOccupySlot } from "./CanOccupySlot";
 import { Structure } from "./Structure";
 
 const components = Dependency<Components>();
+const idService = Dependency<IdService>();
 
 interface Attributes {
-	occupied: boolean;
+	occupiedBy?: string;
 }
 
 /**
@@ -14,31 +18,20 @@ interface Attributes {
 @Component({
 	tag: "StructureSlot",
 })
-export class StructureSlot extends BaseComponent<Attributes> implements OnStart {
-	occupiedBy?: ObjectValue;
+export class StructureSlot extends BaseComponent<Attributes, Model | Part | Attachment> implements OnStart {
 	structure?: Instance;
 
 	onStart() {
-		this.occupiedBy = new Instance("ObjectValue");
-		this.occupiedBy.Parent = this.instance;
-		this.maid.GiveTask(this.occupiedBy);
-
-		this.maid.GiveTask(
-			this.occupiedBy.Changed.Connect((value) => {
-				this.instance.SetAttribute("occupied", value !== undefined);
-			}),
-		);
-
 		//recurse parents until finding something with the Structure tag
-		let last = this.instance;
+		let last: Instance = this.instance;
 		while (!CollectionService.HasTag(last, "Structure") && last.Parent) {
 			last = last.Parent;
 		}
 		this.structure = last;
 
-		this.onAttributeChanged("occupied", (newValue) => {
+		this.onAttributeChanged("occupiedBy", (newValue) => {
 			const structure = components.getComponent<Structure>(this.structure!);
-			structure.setSlotState(this.instance, newValue);
+			structure.setSlotState(this.instance, newValue !== undefined);
 		});
 	}
 
@@ -46,12 +39,29 @@ export class StructureSlot extends BaseComponent<Attributes> implements OnStart 
 	 * @returns whatever is occupying this slot
 	 */
 	getOccupier() {
-		return this.occupiedBy?.Value;
+		return this.attributes.occupiedBy;
 	}
 
 	setOccupier(occupier: Player | Model) {
-		if (this.occupiedBy) {
-			this.occupiedBy.Value = occupier;
+		const id = idService.getIdFromInstance(occupier);
+
+		if (id !== undefined) {
+			this.instance.SetAttribute("occupiedBy", id);
+
+			const canOccupySlot = components.getComponent<CanOccupySlot>(occupier);
+			canOccupySlot.setOccupying(this.instance);
+		} else {
+			Log.Error("Id for {Occupier} was undefined", occupier);
+		}
+	}
+
+	getCFrame() {
+		if (this.instance.IsA("Model")) {
+			return this.instance.GetPrimaryPartCFrame();
+		} else if (this.instance.IsA("Part")) {
+			return this.instance.CFrame;
+		} else if (this.instance.IsA("Attachment")) {
+			return this.instance.WorldCFrame;
 		}
 	}
 }

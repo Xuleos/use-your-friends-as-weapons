@@ -36,7 +36,7 @@ export class Structure extends BaseComponent<Attributes> implements OnStart {
 
 	private checkDescendantForSlot(descendant: Instance) {
 		if (CollectionService.HasTag(descendant, "StructureSlot")) {
-			this.slots.set(descendant, descendant.GetAttribute("occupied") as boolean);
+			this.slots.set(descendant, descendant.GetAttribute("occupiedBy") !== undefined);
 		}
 	}
 
