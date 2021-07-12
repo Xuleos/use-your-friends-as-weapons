@@ -3,6 +3,7 @@ import Log, { Logger } from "@rbxts/log";
 import { $git } from "rbxts-transform-debug";
 import Zircon, { ZirconClient } from "@rbxts/zircon";
 import { StarterGui } from "@rbxts/services";
+import SyncedClock from "shared/SyncedClock";
 
 // eslint-disable-next-line prettier/prettier
 Log.SetLogger(
@@ -19,6 +20,8 @@ ZirconClient.BindConsole({
 });
 
 StarterGui.SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false);
+
+SyncedClock.Initialize();
 
 Flamework.addPaths("src/client/controllers", "src/client/components");
 Flamework.ignite();
