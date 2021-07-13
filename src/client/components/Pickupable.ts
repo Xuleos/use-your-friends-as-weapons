@@ -1,9 +1,10 @@
 import { Component, BaseComponent } from "@rbxts/flamework";
+import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
 
 interface Attributes {}
 
-const pickupItem = Remotes.Client.Get("pickupItem");
+const pickupItem = Remotes.Client.Get(RemoteId.pickupItem);
 
 @Component({
 	tag: "Pickupable",

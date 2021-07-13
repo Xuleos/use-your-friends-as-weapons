@@ -1,7 +1,8 @@
-declare namespace SyncedClock {
-	export function Initialize(): void;
-
-	export function GetTime(this: SyncedClock): number;
+interface SyncedClock {
+	GetTime(): number;
+	Initialize(): void;
 }
+
+declare const SyncedClock: SyncedClock;
 
 export = SyncedClock;
