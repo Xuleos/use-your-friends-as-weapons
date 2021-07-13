@@ -16,7 +16,7 @@ const BulletDefinitions: {
 		MinExitVelocity: 50,
 		Penetration: true,
 		Gravity: 0,
-		Radius: 1.5,
+		Radius: 0.8,
 	},
 } as const;
 
