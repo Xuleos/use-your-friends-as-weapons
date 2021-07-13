@@ -1,5 +1,4 @@
 import { Service, OnStart } from "@rbxts/flamework";
-import Log from "@rbxts/log";
 import { CollectionService } from "@rbxts/services";
 import randomString from "shared/utility/randomString";
 

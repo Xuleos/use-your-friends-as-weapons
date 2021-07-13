@@ -1,0 +1,9 @@
+{
+    "Name": "RemoteId",
+    "IDs": [
+        "interactWithStructureSlot",
+        "pickupItem",
+        "fireBullet",
+        "receiveBullet"
+    ]
+}

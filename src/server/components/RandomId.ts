@@ -1,5 +1,5 @@
 import { Component, BaseComponent, OnStart } from "@rbxts/flamework";
-import Log from "@rbxts/log";
+import { $dbg } from "rbxts-transform-debug";
 
 interface Attributes {}
 
