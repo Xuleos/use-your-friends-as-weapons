@@ -3,6 +3,7 @@
     "IDs": [
         "interactWithStructureSlot",
         "pickupItem",
-        "fireBullet"
+        "fireBullet",
+        "receiveBullet"
     ]
 }

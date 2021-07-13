@@ -10,6 +10,7 @@ import SyncedClock from "shared/SyncedClock";
 @Service({})
 export class BulletService implements OnStart {
 	private fireBullet = Remotes.Server.Create(RemoteId.fireBullet);
+	private receiveBullet = Remotes.Server.Create(RemoteId.receiveBullet);
 
 	onStart() {
 		this.fireBullet.Connect((player, origin, endPos, time, bulletType) => {
@@ -19,6 +20,9 @@ export class BulletService implements OnStart {
 			const velocity = new CFrame(origin, endPos).LookVector.mul(def.Speed !== undefined ? def.Speed : 75);
 
 			const physicsIgnore = CollectionService.GetTagged("IgnoreRaycasts");
+			if (player.Character) {
+				physicsIgnore.push(player.Character);
+			}
 
 			new Projectile({
 				Position: origin,
@@ -46,7 +50,7 @@ export class BulletService implements OnStart {
 				Renderer: new InvisibleProjectRenderer(),
 			});
 
-			this.fireBullet.SendToAllPlayersExcept(player, origin, endPos, time, bulletType);
+			this.receiveBullet.SendToAllPlayersExcept(player, player, origin, endPos, time, bulletType);
 		});
 	}
 }

@@ -11,12 +11,16 @@ export class BulletController implements OnStart {
 	private mouse = Players.LocalPlayer.GetMouse();
 
 	private fireBullet = Remotes.Client.Get(RemoteId.fireBullet);
+	private receiveBullet = Remotes.Client.Get(RemoteId.receiveBullet);
 
 	onStart() {
-		this.fireBullet.Connect((origin, endPos, time, bulletType) => {
+		this.receiveBullet.Connect((sender, origin, endPos, time, bulletType) => {
 			const def = BulletDefinitions[bulletType];
 
 			const physicsIgnore = CollectionService.GetTagged("IgnoreRaycasts");
+			if (sender.Character) {
+				physicsIgnore.push(sender.Character);
+			}
 
 			const deltaTime = SyncedClock.GetTime() - time + 0.02;
 			const velocity = new CFrame(origin, endPos).LookVector.mul(def.Speed !== undefined ? def.Speed : 75);
@@ -46,6 +50,9 @@ export class BulletController implements OnStart {
 		const velocity = new CFrame(origin, endPos).LookVector.mul(def.Speed !== undefined ? def.Speed : 75);
 
 		const physicsIgnore = CollectionService.GetTagged("IgnoreRaycasts");
+		if (Players.LocalPlayer.Character) {
+			physicsIgnore.push(Players.LocalPlayer.Character);
+		}
 
 		new Projectile({
 			Position: origin,
