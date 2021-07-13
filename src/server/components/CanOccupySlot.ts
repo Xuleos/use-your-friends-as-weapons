@@ -44,8 +44,6 @@ export class CanOccupySlot extends BaseComponent<Attributes, Player | Model> imp
 					}
 
 					if (this.instance.PrimaryPart) {
-						this.instance.PrimaryPart.Anchored = true;
-
 						this.instance.SetPrimaryPartCFrame(slotCF);
 						Joint.weld(structureSlot.instance, this.instance.PrimaryPart, "Weld");
 					}
@@ -53,7 +51,6 @@ export class CanOccupySlot extends BaseComponent<Attributes, Player | Model> imp
 					const char = this.instance.Character;
 					if (validateTree(char, CharacterRigR15)) {
 						char.Humanoid.PlatformStand = true;
-						char.HumanoidRootPart.Anchored = true;
 
 						char.SetPrimaryPartCFrame(slotCF);
 						Joint.weld(structureSlot.instance, char.HumanoidRootPart, "Weld");
