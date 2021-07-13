@@ -4,6 +4,7 @@ import { CollectionService, Players } from "@rbxts/services";
 import { validateTree } from "@rbxts/validate-tree";
 import { CharacterRigR15 } from "@rbxts/yield-for-character";
 import { IdService } from "server/services/IdService";
+import Joint from "shared/utility/Joint";
 import { StructureSlot } from "./StructureSlot";
 
 const components = Dependency<Components>();
@@ -44,17 +45,18 @@ export class CanOccupySlot extends BaseComponent<Attributes, Player | Model> imp
 
 					if (this.instance.PrimaryPart) {
 						this.instance.PrimaryPart.Anchored = true;
-					}
 
-					this.instance.SetPrimaryPartCFrame(slotCF);
+						this.instance.SetPrimaryPartCFrame(slotCF);
+						Joint.weld(structureSlot.instance, this.instance.PrimaryPart, "Weld");
+					}
 				} else if (this.instance.IsA("Player") && this.instance.Character) {
 					const char = this.instance.Character;
 					if (validateTree(char, CharacterRigR15)) {
 						char.Humanoid.PlatformStand = true;
 						char.HumanoidRootPart.Anchored = true;
-						char.HumanoidRootPart.CanCollide = false;
 
 						char.SetPrimaryPartCFrame(slotCF);
+						Joint.weld(structureSlot.instance, char.HumanoidRootPart, "Weld");
 					}
 				}
 			}

@@ -18,7 +18,7 @@ interface Attributes {
 @Component({
 	tag: "StructureSlot",
 })
-export class StructureSlot extends BaseComponent<Attributes, Model | Part | Attachment> implements OnStart {
+export class StructureSlot extends BaseComponent<Attributes, BasePart> implements OnStart {
 	structure?: Instance;
 
 	onStart() {
