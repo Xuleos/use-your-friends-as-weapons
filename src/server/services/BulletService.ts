@@ -32,6 +32,17 @@ export class BulletService implements OnStart {
 				MinExitVelocity: def.MinExitVelocity,
 				Penetration: def.Penetration,
 				PhysicsIgnore: physicsIgnore,
+				OnTouch: (part) => {
+					const model = part.FindFirstAncestorWhichIsA("Model");
+					if (model) {
+						const humanoid = model.FindFirstChildWhichIsA("Humanoid");
+
+						if (humanoid) {
+							humanoid.Health -= 20;
+						}
+					}
+					return true;
+				},
 				Renderer: new InvisibleProjectRenderer(),
 			});
 
