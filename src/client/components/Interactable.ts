@@ -10,6 +10,7 @@ type InteractableTrigger = "StructureSlot" | "Pickupable";
 
 interface Attributes {
 	trigger: InteractableTrigger;
+	canInteract: boolean;
 }
 
 @Component({
@@ -57,5 +58,9 @@ export class Interactable extends BaseComponent<Attributes> implements OnStart {
 
 		proximityPrompt.ActionText = Translator.formatByKey(`Interactable.${this.attributes.trigger}.ActionText`);
 		proximityPrompt.ObjectText = this.instance.Name;
+
+		this.onAttributeChanged("canInteract", (newValue) => {
+			proximityPrompt.Enabled = newValue;
+		});
 	}
 }

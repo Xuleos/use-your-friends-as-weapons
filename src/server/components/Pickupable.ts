@@ -1,9 +1,6 @@
 import { Component, BaseComponent, OnStart } from "@rbxts/flamework";
 
-interface Attributes {
-	/** Whether people can pick it up */
-	toggle: boolean;
-}
+interface Attributes {}
 
 @Component({
 	tag: "Pickupable",
