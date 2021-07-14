@@ -1,9 +1,8 @@
 import { Component, BaseComponent, Components, Dependency, OnStart } from "@rbxts/flamework";
 import Log from "@rbxts/log";
-import { Players } from "@rbxts/services";
+import { CollectionService, Players } from "@rbxts/services";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
-import { HoldingSlot } from "./HoldingSlot";
 import { Interactable } from "./Interactable";
 
 const components = Dependency<Components>();
@@ -18,7 +17,15 @@ interface Attributes {
 	tag: "StructureSlot",
 })
 export class StructureSlot extends BaseComponent<Attributes> implements OnStart {
+	structure?: Instance;
+
 	onStart() {
+		let last: Instance = this.instance;
+		while (!CollectionService.HasTag(last, "Structure") && last.Parent) {
+			last = last.Parent;
+		}
+		this.structure = last;
+
 		this.onAttributeChanged("occupiedBy", (newValue) => {
 			this.setInteractable(newValue === undefined);
 		});

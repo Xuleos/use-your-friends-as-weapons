@@ -42,10 +42,9 @@ export class BulletController implements OnStart {
 		});
 	}
 
-	fire(origin: Vector3) {
+	fire(origin: Vector3, endPos = this.mouse.Hit.Position) {
 		const def = BulletDefinitions["BasicBullet"];
 
-		const endPos = this.mouse.Hit.Position;
 		const timeFired = SyncedClock.GetTime();
 		const velocity = new CFrame(origin, endPos).LookVector.mul(def.Speed !== undefined ? def.Speed : 75);
 
