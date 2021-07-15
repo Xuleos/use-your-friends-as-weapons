@@ -1,9 +1,11 @@
 import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { RunService } from "@rbxts/services";
+import { getControlSlotConnection } from "server/modules/getControlSlotConnectionServer";
 import { IdService } from "server/services/IdService";
+import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
 import { StructureSlot } from "../StructureSlot";
 
 const components = Dependency<Components>();
-const idService = Dependency<IdService>();
 
 interface Attributes {}
 
@@ -12,25 +14,22 @@ interface Attributes {}
 })
 export class ModelNetworkOwnership extends BaseComponent<Attributes, BasePart> implements OnStart {
 	onStart() {
-		const slot = components.getComponent<StructureSlot>(this.instance);
+		waitForTagAdded(this.instance, "StructureSlot").then(() => {
+			RunService.Heartbeat.Wait();
 
-		if (slot.structure) {
-			this.maid.GiveTask(
-				slot.structure.GetAttributeChangedSignal("completed").Connect(() => {
-					if (slot.structure?.GetAttribute("completed") === true) {
-						const occupier = slot.getOccupier();
-						if (occupier !== undefined) {
-							const player = idService.getInstanceFromId(occupier);
+			const slot = components.getComponent<StructureSlot>(this.instance);
 
-							if (player && player.IsA("Player")) {
-								this.instance.SetNetworkOwner(player);
-							}
-						}
-					} else {
-						this.instance.SetNetworkOwner(undefined);
-					}
-				}),
-			);
-		}
+			getControlSlotConnection({
+				instance: this.instance,
+				maid: this.maid,
+				slot: slot,
+				activatedCallback: (player) => {
+					this.instance.SetNetworkOwner(player);
+				},
+				deactivatedCallback: () => {
+					this.instance.SetNetworkOwner(undefined);
+				},
+			});
+		});
 	}
 }

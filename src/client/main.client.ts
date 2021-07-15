@@ -14,10 +14,10 @@ Log.SetLogger(
 		.Create(),
 );
 
-ZirconClient.BindConsole({
+/*ZirconClient.BindConsole({
 	EnableTags: true,
 	Keys: [Enum.KeyCode.Backquote],
-});
+});*/
 
 StarterGui.SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false);
 

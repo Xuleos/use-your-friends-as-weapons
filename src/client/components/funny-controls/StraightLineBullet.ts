@@ -60,7 +60,11 @@ export class StraightLineBullet
 	private inputBegan(input: InputObject, gameProcessed: boolean) {
 		if (input.UserInputType === Enum.UserInputType.MouseButton1 && !gameProcessed) {
 			const originCFrame = this.instance.BulletOrigin.WorldCFrame;
-			bulletController.fire(originCFrame.Position, originCFrame.Position.add(originCFrame.LookVector.mul(75)));
+			bulletController.fire(
+				originCFrame.Position,
+				originCFrame.Position.add(originCFrame.LookVector.mul(75)),
+				"CannonFire",
+			);
 		}
 	}
 }

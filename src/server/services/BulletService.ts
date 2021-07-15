@@ -42,7 +42,7 @@ export class BulletService implements OnStart {
 						const humanoid = model.FindFirstChildWhichIsA("Humanoid");
 
 						if (humanoid) {
-							humanoid.Health -= 20;
+							humanoid.Health -= def.Damage !== undefined ? def.Damage : 10;
 						}
 					}
 					return true;

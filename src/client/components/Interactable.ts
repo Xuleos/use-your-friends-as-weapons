@@ -20,6 +20,7 @@ export class Interactable extends BaseComponent<Attributes> implements OnStart {
 	onStart() {
 		const proximityPrompt = new Instance("ProximityPrompt");
 		proximityPrompt.KeyboardKeyCode = Enum.KeyCode.E;
+		proximityPrompt.RequiresLineOfSight = false;
 		proximityPrompt.Exclusivity = Enum.ProximityPromptExclusivity.OneGlobally;
 		this.maid.GiveTask(proximityPrompt);
 
