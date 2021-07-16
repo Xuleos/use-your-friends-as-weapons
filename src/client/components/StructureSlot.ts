@@ -33,6 +33,10 @@ export class StructureSlot extends BaseComponent<Attributes> implements OnStart 
 		Players.LocalPlayer.GetAttributeChangedSignal("holding").Connect(() => {
 			this.setInteractable(Players.LocalPlayer.GetAttribute("holding") === undefined);
 		});
+
+		Players.LocalPlayer.GetAttributeChangedSignal("occupying").Connect(() => {
+			this.setInteractable(Players.LocalPlayer.GetAttribute("occupying") === undefined);
+		});
 	}
 
 	trigger() {

@@ -62,13 +62,17 @@ export class StructureSlot extends BaseComponent<Attributes, BasePart> implement
 			return;
 		}
 
+		if (this.attributes.occupiedBy !== undefined) {
+			return;
+		}
+
 		const id = idService.getIdFromInstance(occupier);
 
 		if (id !== undefined) {
-			this.instance.SetAttribute("occupiedBy", id);
-
 			const canOccupySlot = components.getComponent<CanOccupySlot>(occupier);
 			canOccupySlot.setOccupying(this.instance);
+
+			this.instance.SetAttribute("occupiedBy", id);
 		} else {
 			Log.Error("Id for {Occupier} was undefined", occupier);
 		}

@@ -38,6 +38,7 @@ export class StraightLineBullet
 				maid: this.maid,
 				slot: slot,
 				activatedCallback: () => {
+					$dbg("Woohooo!!");
 					this.inputConnection = UserInputService.InputBegan.Connect((input, gameProcessed) => {
 						this.inputBegan(input, gameProcessed);
 					});
@@ -60,6 +61,8 @@ export class StraightLineBullet
 	private inputBegan(input: InputObject, gameProcessed: boolean) {
 		if (input.UserInputType === Enum.UserInputType.MouseButton1 && !gameProcessed) {
 			const originCFrame = this.instance.BulletOrigin.WorldCFrame;
+
+			$dbg("Firrre!!");
 			bulletController.fire(
 				originCFrame.Position,
 				originCFrame.Position.add(originCFrame.LookVector.mul(75)),
