@@ -4,6 +4,8 @@
         "interactWithStructureSlot",
         "pickupItem",
         "fireBullet",
-        "receiveBullet"
+        "receiveBullet",
+        "flushIds",
+        "getIds"
     ]
 }

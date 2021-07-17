@@ -6,6 +6,7 @@ import Log from "@rbxts/log";
 import StructureSlotConfig from "shared/consts/StructureSlotConfig";
 import { StructureSlot } from "server/components/StructureSlot";
 import { RemoteId } from "shared/RemoteIds";
+import { CanOccupySlot } from "server/components/CanOccupySlot";
 
 const components = Dependency<Components>();
 
@@ -28,6 +29,10 @@ export class SlotInteractionService implements OnStart {
 				return;
 			}
 
+			const canOccupySlot = components.getComponent<CanOccupySlot>(player);
+			if (canOccupySlot.attributes.occupying !== undefined) {
+				return;
+			}
 			//TODO: probably check to see if player is holding a dummy here and do something different if so
 
 			//do something now

@@ -4,7 +4,7 @@ import { CollectionService, Players } from "@rbxts/services";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
 import SyncedClock from "shared/SyncedClock";
-import BulletDefinitions from "shared/consts/BulletDefinitions";
+import BulletDefinitions, { BulletTypes } from "shared/consts/BulletDefinitions";
 
 @Controller({})
 export class BulletController implements OnStart {
@@ -42,10 +42,9 @@ export class BulletController implements OnStart {
 		});
 	}
 
-	fire(origin: Vector3) {
-		const def = BulletDefinitions["BasicBullet"];
+	fire(origin: Vector3, endPos = this.mouse.Hit.Position, bulletType: BulletTypes = "BasicBullet") {
+		const def = BulletDefinitions[bulletType];
 
-		const endPos = this.mouse.Hit.Position;
 		const timeFired = SyncedClock.GetTime();
 		const velocity = new CFrame(origin, endPos).LookVector.mul(def.Speed !== undefined ? def.Speed : 75);
 
@@ -68,6 +67,6 @@ export class BulletController implements OnStart {
 			Renderer: new CylinderRenderer(def.Color3 !== undefined ? def.Color3 : new Color3(), def.Radius),
 		});
 
-		this.fireBullet.SendToServer(origin, endPos, timeFired, "BasicBullet");
+		this.fireBullet.SendToServer(origin, endPos, timeFired, bulletType);
 	}
 }
