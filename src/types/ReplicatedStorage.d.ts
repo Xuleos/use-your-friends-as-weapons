@@ -1,4 +1,8 @@
 // eslint-disable-next-line roblox-ts/module
 interface ReplicatedStorage extends Instance {
-	assets: Folder & {};
+	assets: Folder & {
+		animations: Folder & {
+			LeftSlash: Animation;
+		};
+	};
 }

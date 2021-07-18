@@ -1,5 +1,12 @@
-import { Component, BaseComponent, OnStart } from "@rbxts/flamework";
+import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import Log from "@rbxts/log";
 import { CollectionService } from "@rbxts/services";
+import { $dbg } from "rbxts-transform-debug";
+import { IdService } from "server/services/IdService";
+import { StructureSlot } from "./StructureSlot";
+
+const components = Dependency<Components>();
+const idService = Dependency<IdService>();
 
 interface Attributes {
 	/** true if all slots are occupied */
@@ -52,5 +59,32 @@ export class Structure extends BaseComponent<Attributes> implements OnStart {
 		}
 
 		this.instance.SetAttribute("completed", completed);
+	}
+
+	getCharactersOccupying() {
+		const characters: Array<Model> = [];
+
+		for (const [slot, _] of this.slots) {
+			const structureSlot = components.getComponent<StructureSlot>(slot);
+
+			const id = structureSlot.getOccupier();
+
+			if (id !== undefined) {
+				const instance = idService.getInstanceFromId(id);
+
+				$dbg(instance);
+				$dbg(instance?.IsA("Player"));
+
+				if (instance && instance.IsA("Player") && instance.Character) {
+					characters.push(instance.Character);
+				}
+			} else {
+				Log.Warn("oops");
+			}
+		}
+
+		$dbg(characters.size());
+
+		return characters;
 	}
 }
