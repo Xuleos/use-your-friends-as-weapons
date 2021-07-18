@@ -20,6 +20,8 @@ export class GunStructure
 	implements OnStart
 {
 	onStart() {
+		this.instance.CanBeDropped = false;
+
 		const structure = components.getComponent<Structure>(this.instance);
 
 		if (structure) {
