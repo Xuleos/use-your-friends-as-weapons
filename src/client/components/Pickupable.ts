@@ -1,5 +1,6 @@
 import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
 import Log from "@rbxts/log";
+import { Players, Workspace } from "@rbxts/services";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
 import { Interactable } from "./Interactable";
@@ -21,15 +22,24 @@ export class Pickupable extends BaseComponent<Attributes, Tool & { Handle: BaseP
 		}
 
 		this.maid.GiveTask(
-			this.instance.Equipped.Connect(() => {
-				Log.Debug("Pickupable item equipped");
-				this.setInteractable(false);
+			this.instance.AncestryChanged.Connect(() => {
+				if (this.instance.Parent === Workspace) {
+					this.setInteractable(true);
+				} else {
+					this.setInteractable(false);
+				}
 			}),
 		);
 
 		this.maid.GiveTask(
-			this.instance.Unequipped.Connect(() => {
-				this.setInteractable(true);
+			Players.LocalPlayer.GetAttributeChangedSignal("occupying").Connect(() => {
+				this.setInteractable(Players.LocalPlayer.GetAttribute("occupying") === undefined);
+			}),
+		);
+
+		this.maid.GiveTask(
+			Players.LocalPlayer.GetAttributeChangedSignal("holding").Connect(() => {
+				this.setInteractable(Players.LocalPlayer.GetAttribute("holding") === undefined);
 			}),
 		);
 	}

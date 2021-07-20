@@ -50,10 +50,11 @@ export class CanOccupySlot extends BaseComponent<Attributes, Player | Model> imp
 				} else if (this.instance.IsA("Player") && this.instance.Character) {
 					const char = this.instance.Character;
 					if (validateTree(char, CharacterRigR15)) {
-						char.Humanoid.PlatformStand = true;
-
 						char.SetPrimaryPartCFrame(slotCF);
 						Joint.weld(structureSlot.instance, char.HumanoidRootPart, "Weld");
+
+						char.HumanoidRootPart.Massless = true;
+						char.Humanoid.PlatformStand = true;
 					}
 				}
 			}

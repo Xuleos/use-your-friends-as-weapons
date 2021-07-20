@@ -45,6 +45,10 @@ export class HoldingSlot extends BaseComponent<Attributes, Player> implements On
 	}
 
 	equip(tool: Tool) {
+		if (tool.Parent !== Workspace) {
+			return;
+		}
+
 		if (this.attributes.holding !== undefined) {
 			return;
 		}
