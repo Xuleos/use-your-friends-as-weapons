@@ -37,6 +37,7 @@ export class ShieldStructure
 						this.shieldPart = new Instance("Part");
 						this.shieldPart.Anchored = false;
 						this.shieldPart.CanCollide = false;
+						this.shieldPart.Material = Enum.Material.ForceField;
 						this.shieldPart.Shape = Enum.PartType.Ball;
 						this.shieldPart.Size = new Vector3(20, 20, 20);
 						this.shieldPart.Transparency = 0.8;
