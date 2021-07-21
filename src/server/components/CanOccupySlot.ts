@@ -51,7 +51,7 @@ export class CanOccupySlot extends BaseComponent<Attributes, Player | Model> imp
 					const char = this.instance.Character;
 					if (validateTree(char, CharacterRigR15)) {
 						char.SetPrimaryPartCFrame(slotCF);
-						Joint.weld(structureSlot.instance, char.HumanoidRootPart, "Weld");
+						Joint.weld(char.HumanoidRootPart, structureSlot.instance, "Weld", char);
 
 						char.HumanoidRootPart.Massless = true;
 						char.Humanoid.PlatformStand = true;
