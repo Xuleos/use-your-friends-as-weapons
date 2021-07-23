@@ -42,7 +42,9 @@
         "@rbxts/rust-classes": "^0.10.0",
         "@rbxts/services": "^1.1.5",
         "@rbxts/signal": "^1.0.3",
+        "@rbxts/t": "^2.1.4",
         "@rbxts/validate-tree": "^1.1.1",
+        "@rbxts/weighted-random-picker": "^1.0.1",
         "@rbxts/yield-for-character": "^1.1.1",
         "@rbxts/zircon": "^0.8.0-beta.0",
         "rbxts-transform-debug": "^0.6.1"
