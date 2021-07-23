@@ -6,6 +6,7 @@ import { CylinderRenderer, Projectile } from "shared/Projectile2";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
 import SyncedClock from "shared/SyncedClock";
+import { takeDamageToHumanoid } from "shared/utility/humanoidDamageWrapper";
 
 @Service({})
 export class BulletService implements OnStart {
@@ -42,7 +43,7 @@ export class BulletService implements OnStart {
 						const humanoid = model.FindFirstChildWhichIsA("Humanoid");
 
 						if (humanoid) {
-							humanoid.Health -= def.Damage !== undefined ? def.Damage : 10;
+							takeDamageToHumanoid(humanoid, def.Damage !== undefined ? def.Damage : 10);
 						}
 					}
 					return true;

@@ -25,9 +25,27 @@ export class ModelNetworkOwnership extends BaseComponent<Attributes, BasePart> i
 				slot: slot,
 				activatedCallback: (player) => {
 					this.instance.SetNetworkOwner(player);
+
+					const parent = this.instance.Parent;
+					if (parent) {
+						for (const child of parent?.GetChildren()) {
+							if (child.IsA("BasePart") && !child.Anchored) {
+								child.SetNetworkOwner(player);
+							}
+						}
+					}
 				},
 				deactivatedCallback: () => {
 					this.instance.SetNetworkOwner(undefined);
+
+					const parent = this.instance.Parent;
+					if (parent) {
+						for (const child of parent?.GetChildren()) {
+							if (child.IsA("BasePart") && !child.Anchored) {
+								child.SetNetworkOwner(undefined);
+							}
+						}
+					}
 				},
 			});
 		});
