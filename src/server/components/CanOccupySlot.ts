@@ -1,6 +1,7 @@
-import { Component, BaseComponent, OnStart, Dependency, Components } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import Log from "@rbxts/log";
-import { CollectionService, Players } from "@rbxts/services";
+import { CollectionService } from "@rbxts/services";
 import { validateTree } from "@rbxts/validate-tree";
 import { CharacterRigR15 } from "@rbxts/yield-for-character";
 import { IdService } from "server/services/IdService";
@@ -17,7 +18,16 @@ interface Attributes {
 @Component({
 	tag: "CanOccupySlot",
 })
-export class CanOccupySlot extends BaseComponent<Attributes, Player | Model> implements OnStart {
+export class CanOccupySlot
+	extends BaseComponent<
+		Attributes,
+		| Player
+		| (Tool & {
+				Handle: BasePart;
+		  })
+	>
+	implements OnStart
+{
 	onStart() {
 		this.onAttributeChanged("occupying", (newValue, oldValue) => {
 			if (newValue === oldValue) {
@@ -37,15 +47,17 @@ export class CanOccupySlot extends BaseComponent<Attributes, Player | Model> imp
 					return;
 				}
 
-				if (this.instance.IsA("Model")) {
+				if (this.instance.IsA("Tool")) {
 					const humanoid = this.instance.FindFirstChildOfClass("Humanoid");
 					if (humanoid) {
 						humanoid.PlatformStand = true;
 					}
 
-					if (this.instance.PrimaryPart) {
-						this.instance.SetPrimaryPartCFrame(slotCF);
-						Joint.weld(structureSlot.instance, this.instance.PrimaryPart, "Weld");
+					if (this.instance.Handle) {
+						this.instance.Handle.Anchored = true;
+						this.instance.Handle.CFrame = slotCF;
+						Joint.weld(structureSlot.instance, this.instance.Handle, "Weld", this.instance);
+						this.instance.Handle.Anchored = false;
 					}
 				} else if (this.instance.IsA("Player") && this.instance.Character) {
 					const char = this.instance.Character;

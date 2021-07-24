@@ -1,18 +1,19 @@
-import { Service, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { Components } from "@flamework/components";
+import { Dependency, OnStart, Service } from "@flamework/core";
 import { CollectionService, Players } from "@rbxts/services";
 import { HoldingSlot } from "server/components/HoldingSlot";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
 
-const components = Dependency<Components>();
-
 @Service({})
 export class PickupService implements OnStart {
 	private pickupItem = Remotes.Server.Create(RemoteId.pickupItem);
 
+	constructor(private components: Components) {}
+
 	onStart() {
 		this.pickupItem.Connect((player, tool) => {
-			const holdingSlot = components.getComponent<HoldingSlot>(player);
+			const holdingSlot = this.components.getComponent<HoldingSlot>(player);
 			holdingSlot.equip(tool);
 		});
 

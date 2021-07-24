@@ -1,4 +1,6 @@
-import { Component, BaseComponent, OnStart } from "@rbxts/flamework";
+import { BaseComponent, Component } from "@flamework/components";
+import { OnStart } from "@flamework/core";
+import { RunService } from "@rbxts/services";
 
 interface Attributes {}
 
@@ -20,12 +22,19 @@ export class Pickupable
 			touchInterest.Destroy();
 		}
 
-		/*this.maid.GiveTask(
+		this.maid.GiveTask(
+			this.instance.AncestryChanged.Connect(() => {
+				this.instance.CanBeDropped = false;
+			}),
+		);
+
+		this.maid.GiveTask(
 			this.instance.Handle.ChildAdded.Connect((descendant) => {
+				RunService.Stepped.Wait();
 				if (descendant.IsA("TouchTransmitter")) {
 					descendant.Destroy();
 				}
 			}),
-		);*/
+		);
 	}
 }

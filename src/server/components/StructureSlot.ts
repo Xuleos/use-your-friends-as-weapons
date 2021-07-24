@@ -1,4 +1,5 @@
-import { Component, BaseComponent, OnStart, Dependency, Components } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import Log from "@rbxts/log";
 import { CollectionService } from "@rbxts/services";
 import { IdService } from "server/services/IdService";
@@ -42,7 +43,7 @@ export class StructureSlot extends BaseComponent<Attributes, BasePart> implement
 		return this.attributes.occupiedBy;
 	}
 
-	setOccupier(occupier?: Player | Model) {
+	setOccupier(occupier?: Player | Tool) {
 		if (occupier === undefined) {
 			if (this.attributes.occupiedBy === undefined) {
 				return;

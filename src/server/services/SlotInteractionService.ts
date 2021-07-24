@@ -1,14 +1,18 @@
-import { Service, OnStart, Components, Dependency } from "@rbxts/flamework";
-import { CharacterRigR15 } from "@rbxts/yield-for-character";
-import { validateTree } from "@rbxts/validate-tree";
-import Remotes from "shared/Remotes";
+import { Components } from "@flamework/components";
+import { Dependency, OnStart, Service } from "@flamework/core";
 import Log from "@rbxts/log";
-import StructureSlotConfig from "shared/consts/StructureSlotConfig";
-import { StructureSlot } from "server/components/StructureSlot";
-import { RemoteId } from "shared/RemoteIds";
+import { CollectionService } from "@rbxts/services";
+import { t } from "@rbxts/t";
+import { validateTree } from "@rbxts/validate-tree";
+import { CharacterRigR15 } from "@rbxts/yield-for-character";
 import { CanOccupySlot } from "server/components/CanOccupySlot";
+import { HoldingSlot } from "server/components/HoldingSlot";
+import { StructureSlot } from "server/components/StructureSlot";
+import StructureSlotConfig from "shared/consts/StructureSlotConfig";
+import { RemoteId } from "shared/RemoteIds";
+import Remotes from "shared/Remotes";
 
-const components = Dependency<Components>();
+import { IdService } from "./IdService";
 
 const undeterminedPositionTemplate = "Position for the slot {Slot} could not be determined";
 
@@ -16,7 +20,10 @@ const undeterminedPositionTemplate = "Position for the slot {Slot} could not be 
 export class SlotInteractionService implements OnStart {
 	private interactWithStructureSlot = Remotes.Server.Create(RemoteId.interactWithStructureSlot);
 
+	constructor(private idService: IdService, private components: Components) {}
+
 	onStart() {
+		//TODO: do something here to handle cases where the player has a dummy equipped
 		this.interactWithStructureSlot.Connect((player, slot) => {
 			const character = player.Character;
 
@@ -29,14 +36,26 @@ export class SlotInteractionService implements OnStart {
 				return;
 			}
 
-			const canOccupySlot = components.getComponent<CanOccupySlot>(player);
+			const canOccupySlot = this.components.getComponent<CanOccupySlot>(player);
 			if (canOccupySlot.attributes.occupying !== undefined) {
 				return;
 			}
 			//TODO: probably check to see if player is holding a dummy here and do something different if so
+			const structureSlot = this.components.getComponent<StructureSlot>(slot);
+
+			const holdingSlot = this.components.getComponent<HoldingSlot>(player);
+			const id = holdingSlot.attributes.holding;
+			if (id !== undefined) {
+				const instance = this.idService.getInstanceFromId(id);
+
+				if (t.instanceIsA("Tool")(instance) && CollectionService.HasTag(instance, "Dummy")) {
+					holdingSlot.equip(undefined);
+					structureSlot.setOccupier(instance);
+					return;
+				}
+			}
 
 			//do something now
-			const structureSlot = components.getComponent<StructureSlot>(slot);
 			structureSlot.setOccupier(player);
 		});
 	}

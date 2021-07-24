@@ -1,5 +1,4 @@
-import { OnTick, Service } from "@rbxts/flamework";
-import Log from "@rbxts/log";
+import { OnTick, Service } from "@flamework/core";
 import Octree from "@rbxts/octree";
 import { CollectionService, Players } from "@rbxts/services";
 import { validateTree } from "@rbxts/validate-tree";

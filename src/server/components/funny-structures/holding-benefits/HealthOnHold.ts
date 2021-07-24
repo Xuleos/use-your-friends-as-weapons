@@ -1,5 +1,5 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
-import Log from "@rbxts/log";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import { RunService } from "@rbxts/services";
 import { Structure } from "server/components/Structure";
 import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
@@ -19,14 +19,14 @@ export class HealthOnHold extends BaseComponent<Attributes> implements OnStart {
 			const structure = components.getComponent<Structure>(this.instance);
 
 			if (structure) {
-				structure.onAttributeChanged("completed", (completed) => {
+				this.instance.GetAttributeChangedSignal("completed").Connect(() => {
 					const holder = this.instance.Parent;
 
 					if (holder) {
 						const humanoid = holder.FindFirstChildWhichIsA("Humanoid");
 
 						if (humanoid) {
-							if (completed) {
+							if (this.instance.GetAttribute("completed") === true) {
 								humanoid.MaxHealth += 100;
 							} else {
 								humanoid.MaxHealth -= 100;

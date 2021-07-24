@@ -1,13 +1,12 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import Roact from "@rbxts/roact";
-import { ContextActionService, Players, RunService } from "@rbxts/services";
+import { Players, RunService } from "@rbxts/services";
 import { IdController } from "client/controllers/IdController";
 import Scale from "client/ui/components/Scale";
 import Turn from "client/ui/components/Turn";
 import { getControlSlotConnection } from "client/utility/getControlSlotConnection";
-import { $dbg } from "rbxts-transform-debug";
 import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
-import { CanOccupySlot } from "../CanOccupySlot";
 import { StructureSlot } from "../StructureSlot";
 
 const components = Dependency<Components>();

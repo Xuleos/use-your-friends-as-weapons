@@ -1,4 +1,4 @@
-import { Controller, OnStart } from "@rbxts/flamework";
+import { Controller, OnStart } from "@flamework/core";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
 

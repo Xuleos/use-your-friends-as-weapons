@@ -1,4 +1,5 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import { RunService, Workspace } from "@rbxts/services";
 import Joint from "shared/utility/Joint";
 import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
@@ -31,8 +32,8 @@ export class ShieldStructure
 			const structure = components.getComponent<Structure>(this.instance);
 
 			if (structure) {
-				structure.onAttributeChanged("completed", (completed) => {
-					if (completed) {
+				this.instance.GetAttributeChangedSignal("completed").Connect(() => {
+					if (this.instance.GetAttribute("completed") === true) {
 						//enable the shield
 						this.shieldPart = new Instance("Part");
 						this.shieldPart.Anchored = false;

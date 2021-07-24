@@ -1,4 +1,5 @@
-import { Component, BaseComponent, OnStart, OnTick } from "@rbxts/flamework";
+import { BaseComponent, Component } from "@flamework/components";
+import { OnStart, OnTick } from "@flamework/core";
 
 interface Attributes {
 	deleteAfter?: number;

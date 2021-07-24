@@ -1,8 +1,8 @@
-import { Service, OnStart } from "@rbxts/flamework";
-import { CollectionService, Players } from "@rbxts/services";
+import { OnStart, Service } from "@flamework/core";
+import { CollectionService } from "@rbxts/services";
 import { InvisibleProjectRenderer } from "server/modules/InvisibleProjectRenderer";
 import BulletDefinitions from "shared/consts/BulletDefinitions";
-import { CylinderRenderer, Projectile } from "shared/Projectile2";
+import { Projectile } from "shared/Projectile2";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
 import SyncedClock from "shared/SyncedClock";

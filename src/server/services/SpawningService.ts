@@ -1,9 +1,8 @@
-import { Service, OnStart, OnTick } from "@rbxts/flamework";
+import { OnStart, OnTick, Service } from "@flamework/core";
 import Log from "@rbxts/log";
-import { CollectionService, ReplicatedStorage, RunService, Workspace } from "@rbxts/services";
+import { CollectionService, ReplicatedStorage, Workspace } from "@rbxts/services";
 import { t } from "@rbxts/t";
 import RandomPicker from "@rbxts/weighted-random-picker";
-import { $dbg } from "rbxts-transform-debug";
 import generateDistribution from "shared/utility/generateDistribution";
 import { getRandomPositionOnPart } from "shared/utility/getRandomPositionOnPart";
 
@@ -105,7 +104,7 @@ export class SpawningService implements OnStart, OnTick {
 				clone.Handle.Anchored = true;
 				clone.Handle.CFrame = new CFrame(results.Position.add(new Vector3(0, yAdjustment, 0)));
 			} else {
-				Log.Warn("What");
+				Log.Warn("Somehow this clone is not a model nor tool?");
 			}
 
 			clone.Parent = Workspace;

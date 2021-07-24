@@ -1,4 +1,5 @@
-import { Component, BaseComponent, OnStart, Components, Dependency, OnTick } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart, OnTick } from "@flamework/core";
 import Log from "@rbxts/log";
 import { validateTree } from "@rbxts/validate-tree";
 import { Structure } from "server/components/Structure";
@@ -35,7 +36,7 @@ export class SacrificeStructure extends BaseComponent<Attributes, Tool> implemen
 
 		const structure = components.getComponent<Structure>(this.instance);
 
-		if (structure.attributes.completed) {
+		if (structure.isCompleted()) {
 			this.cachedCharacters = structure.getCharactersOccupying();
 
 			for (const character of this.cachedCharacters) {

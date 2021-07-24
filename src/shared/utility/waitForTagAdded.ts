@@ -15,7 +15,7 @@ export async function waitForTagAdded(instance: Instance, tag: string): Promise<
 			}
 		});
 
-		Promise.delay(5).then(() => {
+		Promise.delay(3).then(() => {
 			if (connection) {
 				connection.Disconnect();
 

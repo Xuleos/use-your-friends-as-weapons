@@ -1,4 +1,5 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import Log from "@rbxts/log";
 import { CollectionService } from "@rbxts/services";
 import { $dbg } from "rbxts-transform-debug";
@@ -59,6 +60,10 @@ export class Structure extends BaseComponent<Attributes> implements OnStart {
 		}
 
 		this.instance.SetAttribute("completed", completed);
+	}
+
+	isCompleted() {
+		return this.attributes.completed;
 	}
 
 	getCharactersOccupying() {

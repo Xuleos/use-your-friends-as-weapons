@@ -1,4 +1,4 @@
-import { Service, OnStart } from "@rbxts/flamework";
+import { OnStart, Service } from "@flamework/core";
 import { CollectionService } from "@rbxts/services";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";

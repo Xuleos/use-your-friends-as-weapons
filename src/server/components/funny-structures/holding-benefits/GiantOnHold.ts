@@ -1,4 +1,5 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import { RunService } from "@rbxts/services";
 import { validateTree } from "@rbxts/validate-tree";
 import { CharacterRigR15 } from "@rbxts/yield-for-character";
@@ -20,12 +21,12 @@ export class GiantOnHold extends BaseComponent<Attributes> implements OnStart {
 			const structure = components.getComponent<Structure>(this.instance);
 
 			if (structure) {
-				structure.onAttributeChanged("completed", (completed) => {
+				this.instance.GetAttributeChangedSignal("completed").Connect(() => {
 					const holder = this.instance.Parent;
 
 					if (holder) {
 						if (validateTree(holder, CharacterRigR15)) {
-							if (completed) {
+							if (this.instance.GetAttribute("completed") === true) {
 								holder.Humanoid.BodyDepthScale.Value += 20;
 								holder.Humanoid.BodyHeightScale.Value += 20;
 								holder.Humanoid.BodyWidthScale.Value += 20;
