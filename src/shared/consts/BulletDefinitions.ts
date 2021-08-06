@@ -1,4 +1,4 @@
-import { AdditionalProjectileConfig } from "shared/Projectile2/ProjectileConfig";
+import { AdditionalProjectileConfig } from "shared/RbxtsProjectileFork/ProjectileConfig";
 
 export type BulletTypes = "BasicBullet" | "CannonFire";
 

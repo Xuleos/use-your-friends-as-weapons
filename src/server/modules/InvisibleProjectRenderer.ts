@@ -1,4 +1,4 @@
-import { IRenderer } from "shared/Projectile2";
+import { IRenderer } from "shared/RbxtsProjectileFork";
 
 /**
  * An empty renderer
