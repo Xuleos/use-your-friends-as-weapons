@@ -1,7 +1,7 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import { RunService } from "@rbxts/services";
 import { getControlSlotConnection } from "server/modules/getControlSlotConnectionServer";
-import { IdService } from "server/services/IdService";
 import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
 import { StructureSlot } from "../StructureSlot";
 

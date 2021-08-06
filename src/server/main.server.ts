@@ -1,4 +1,4 @@
-import { Flamework } from "@rbxts/flamework";
+import { Flamework } from "@flamework/core";
 import Log, { Logger } from "@rbxts/log";
 import { $git } from "rbxts-transform-debug";
 import Zircon from "@rbxts/zircon";

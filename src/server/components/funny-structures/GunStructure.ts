@@ -1,5 +1,5 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
-import { Structure } from "../Structure";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 
 interface Attributes {}
 
@@ -21,15 +21,5 @@ export class GunStructure
 {
 	onStart() {
 		this.instance.CanBeDropped = false;
-
-		const structure = components.getComponent<Structure>(this.instance);
-
-		if (structure) {
-			structure.onAttributeChanged("completed", (newValue) => {
-				if (newValue) {
-					//enable the gun stuff B)
-				}
-			});
-		}
 	}
 }

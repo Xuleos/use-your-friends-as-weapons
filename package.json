@@ -25,14 +25,15 @@
         "eslint-plugin-roblox-ts": "0.0.21",
         "prettier": "^2.0.5",
         "rbxts-build": "^1.1.2",
-        "rbxts-transformer-flamework": "^0.0.12",
+        "rbxts-transformer-flamework": "^1.0.0-beta.0",
         "typescript": "^4.3.5"
     },
     "dependencies": {
-        "@rbxts/flamework": "^0.0.11",
+        "@flamework/components": "^1.0.0-beta.1",
+        "@flamework/core": "^1.0.0-beta.0",
         "@rbxts/janitor": "^1.1.3",
         "@rbxts/log": "^0.3.0-alpha.1",
-        "@rbxts/net": "^2.1.3",
+        "@rbxts/net": "^2.1.4",
         "@rbxts/octree": "^1.0.1",
         "@rbxts/projectile": "^1.3.0",
         "@rbxts/raycast-hitbox": "^1.0.0",
@@ -42,9 +43,12 @@
         "@rbxts/rust-classes": "^0.10.0",
         "@rbxts/services": "^1.1.5",
         "@rbxts/signal": "^1.0.3",
+        "@rbxts/t": "^2.1.4",
         "@rbxts/validate-tree": "^1.1.1",
+        "@rbxts/weighted-random-picker": "^1.0.1",
         "@rbxts/yield-for-character": "^1.1.1",
         "@rbxts/zircon": "^0.8.0-beta.0",
-        "rbxts-transform-debug": "^0.6.1"
+        "rbxts-transform-debug": "^0.6.1",
+        "roblox-ts": "^1.2.3"
     }
 }

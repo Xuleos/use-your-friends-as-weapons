@@ -1,4 +1,4 @@
-import { Controller, OnStart } from "@rbxts/flamework";
+import { Controller, OnStart } from "@flamework/core";
 import { CylinderRenderer, Projectile } from "shared/Projectile2";
 import { CollectionService, Players } from "@rbxts/services";
 import { RemoteId } from "shared/RemoteIds";

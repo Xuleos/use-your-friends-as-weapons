@@ -4,8 +4,8 @@ import { OnStart } from "@flamework/core";
 interface Attributes {}
 
 @Component({
-	tag: "RandomId",
+	tag: "Dummy",
 })
-export class RandomId extends BaseComponent<Attributes> implements OnStart {
+export class Dummy extends BaseComponent<Attributes> implements OnStart {
 	onStart() {}
 }

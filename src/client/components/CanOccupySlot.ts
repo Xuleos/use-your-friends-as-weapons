@@ -1,4 +1,5 @@
-import { BaseComponent, Component, OnStart } from "@rbxts/flamework";
+import { BaseComponent, Component } from "@flamework/components";
+import { OnStart } from "@flamework/core";
 
 interface Attributes {
 	occupying?: string;

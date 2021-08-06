@@ -4,5 +4,9 @@ interface ReplicatedStorage extends Instance {
 		animations: Folder & {
 			LeftSlash: Animation;
 		};
+
+		structures: Folder;
+
+		Dummy: Model;
 	};
 }

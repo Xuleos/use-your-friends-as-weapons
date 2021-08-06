@@ -1,10 +1,10 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import Log from "@rbxts/log";
 import RaycastHitbox from "@rbxts/raycast-hitbox";
 import { HitboxObject } from "@rbxts/raycast-hitbox/out/typings/HitboxObject";
-import { ContextActionService, ReplicatedStorage, RunService, Workspace } from "@rbxts/services";
+import { ReplicatedStorage, RunService, Workspace } from "@rbxts/services";
 import { CharacterRigR15 } from "@rbxts/yield-for-character";
-import { $dbg, $warn } from "rbxts-transform-debug";
 import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
 import { Structure } from "../Structure";
 

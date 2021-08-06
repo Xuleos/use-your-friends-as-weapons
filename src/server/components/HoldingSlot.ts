@@ -1,6 +1,8 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import Log from "@rbxts/log";
 import { CollectionService, Workspace } from "@rbxts/services";
+import { t } from "@rbxts/t";
 import { IdService } from "server/services/IdService";
 
 const components = Dependency<Components>();
@@ -19,12 +21,26 @@ interface Attributes {
 })
 export class HoldingSlot extends BaseComponent<Attributes, Player> implements OnStart {
 	onStart() {
-		this.onAttributeChanged("holding", (newValue) => {
+		this.onAttributeChanged("holding", (newValue, oldValue) => {
 			if (newValue !== undefined) {
 				const instance = idService.getInstanceFromId(newValue);
 
 				if (instance) {
+					if (
+						t.children({
+							Handle: t.instanceIsA("BasePart"),
+						})(instance)
+					) {
+						instance.Handle.Anchored = false;
+					}
+
 					instance.Parent = this.instance.Character;
+				}
+			} else if (oldValue !== undefined) {
+				const instance = idService.getInstanceFromId(oldValue);
+
+				if (instance) {
+					instance.Parent = Workspace;
 				}
 			}
 		});
@@ -44,7 +60,13 @@ export class HoldingSlot extends BaseComponent<Attributes, Player> implements On
 		);
 	}
 
-	equip(tool: Tool) {
+	equip(tool?: Tool) {
+		if (tool === undefined) {
+			this.instance.SetAttribute("holding", undefined);
+
+			return;
+		}
+
 		if (tool.Parent !== Workspace) {
 			return;
 		}

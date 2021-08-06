@@ -1,5 +1,5 @@
-import { BaseComponent, Component, Components, Dependency, OnStart } from "@rbxts/flamework";
-import Log from "@rbxts/log";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import { BulletController } from "client/controllers/BulletController";
 import { Structure } from "../Structure";
 

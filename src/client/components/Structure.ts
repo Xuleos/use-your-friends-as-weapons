@@ -1,4 +1,5 @@
-import { Component, BaseComponent, OnStart } from "@rbxts/flamework";
+import { BaseComponent, Component } from "@flamework/components";
+import { OnStart } from "@flamework/core";
 
 interface Attributes {
 	/** true if all slots are occupied */

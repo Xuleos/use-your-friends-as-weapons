@@ -1,4 +1,5 @@
-import { Dependency, Components } from "@rbxts/flamework";
+import { Components } from "@flamework/components";
+import { Dependency } from "@flamework/core";
 import { Players } from "@rbxts/services";
 import { CanOccupySlot } from "client/components/CanOccupySlot";
 import { StraightLineBullet } from "client/components/funny-controls/StraightLineBullet";

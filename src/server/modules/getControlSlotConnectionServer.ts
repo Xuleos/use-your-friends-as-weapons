@@ -1,4 +1,4 @@
-import { Dependency } from "@rbxts/flamework";
+import { Dependency } from "@flamework/core";
 import { ModelNetworkOwnership } from "server/components/funny-controls/ModelNetworkOwnership";
 import { StructureSlot } from "server/components/StructureSlot";
 import { IdService } from "server/services/IdService";

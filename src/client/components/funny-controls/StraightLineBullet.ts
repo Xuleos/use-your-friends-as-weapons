@@ -1,11 +1,11 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
-import { Players, RunService, UserInputService } from "@rbxts/services";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
+import { RunService, UserInputService } from "@rbxts/services";
 import { BulletController } from "client/controllers/BulletController";
 import { IdController } from "client/controllers/IdController";
 import { getControlSlotConnection } from "client/utility/getControlSlotConnection";
-import { $dbg, $warn } from "rbxts-transform-debug";
+import { $dbg } from "rbxts-transform-debug";
 import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
-import { CanOccupySlot } from "../CanOccupySlot";
 import { StructureSlot } from "../StructureSlot";
 
 const components = Dependency<Components>();

@@ -1,8 +1,9 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
-import Log from "@rbxts/log";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import { Players, Workspace } from "@rbxts/services";
 import { RemoteId } from "shared/RemoteIds";
 import Remotes from "shared/Remotes";
+import { waitForTagAdded } from "shared/utility/WaitForTagAdded";
 import { Interactable } from "./Interactable";
 
 const components = Dependency<Components>();
@@ -42,6 +43,18 @@ export class Pickupable extends BaseComponent<Attributes, Tool & { Handle: BaseP
 				this.setInteractable(Players.LocalPlayer.GetAttribute("holding") === undefined);
 			}),
 		);
+
+		waitForTagAdded(this.instance, "CanOccupySlot")
+			.then(() => {
+				this.maid.GiveTask(
+					this.instance.GetAttributeChangedSignal("occupying").Connect(() => {
+						this.setInteractable(this.instance.GetAttribute("occupying") === undefined);
+					}),
+				);
+			})
+			.catch(() => {
+				//lol
+			});
 	}
 
 	private setInteractable(toggle: boolean) {

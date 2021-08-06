@@ -1,6 +1,5 @@
-import { Component, BaseComponent, OnStart, Components, Dependency } from "@rbxts/flamework";
-import Log from "@rbxts/log";
-import { $dbg } from "rbxts-transform-debug";
+import { BaseComponent, Component, Components } from "@flamework/components";
+import { Dependency, OnStart } from "@flamework/core";
 import { Structure } from "server/components/Structure";
 import { OctreeService } from "server/services/OctreeService";
 import { takeDamageToHumanoid } from "shared/utility/humanoidDamageWrapper";
@@ -27,7 +26,7 @@ export class BombStructure
 			this.instance.Activated.Connect(() => {
 				const structure = components.getComponent<Structure>(this.instance);
 
-				if (structure.attributes.completed) {
+				if (structure.isCompleted()) {
 					const nearby = octreeService.radiusSearch(this.instance.Handle.Position, 30);
 
 					//make cool particles

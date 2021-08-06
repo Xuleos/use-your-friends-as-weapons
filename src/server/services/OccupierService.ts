@@ -1,4 +1,4 @@
-import { OnStart, Service } from "@rbxts/flamework";
+import { OnStart, Service } from "@flamework/core";
 import { CollectionService, Players } from "@rbxts/services";
 
 @Service({})
