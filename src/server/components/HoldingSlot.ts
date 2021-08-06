@@ -2,6 +2,7 @@ import { BaseComponent, Component, Components } from "@flamework/components";
 import { Dependency, OnStart } from "@flamework/core";
 import Log from "@rbxts/log";
 import { CollectionService, Workspace } from "@rbxts/services";
+import { t } from "@rbxts/t";
 import { IdService } from "server/services/IdService";
 
 const components = Dependency<Components>();
@@ -25,6 +26,14 @@ export class HoldingSlot extends BaseComponent<Attributes, Player> implements On
 				const instance = idService.getInstanceFromId(newValue);
 
 				if (instance) {
+					if (
+						t.children({
+							Handle: t.instanceIsA("BasePart"),
+						})(instance)
+					) {
+						instance.Handle.Anchored = false;
+					}
+
 					instance.Parent = this.instance.Character;
 				}
 			} else if (oldValue !== undefined) {

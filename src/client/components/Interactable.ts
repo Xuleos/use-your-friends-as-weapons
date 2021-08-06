@@ -1,6 +1,7 @@
 import { BaseComponent, Component, Components } from "@flamework/components";
 import { Dependency, OnStart } from "@flamework/core";
 import Log from "@rbxts/log";
+import { t } from "@rbxts/t";
 import Translator from "client/utility/Translate";
 import { Pickupable } from "./Pickupable";
 import { StructureSlot } from "./StructureSlot";
@@ -16,6 +17,15 @@ interface Attributes {
 
 @Component({
 	tag: "Interactable",
+	instanceGuard: t.union(
+		t.intersection(
+			t.instanceIsA("Tool"),
+			t.children({
+				Handle: t.instanceIsA("BasePart"),
+			}),
+		),
+		t.instanceIsA("BasePart"),
+	),
 })
 export class Interactable extends BaseComponent<Attributes> implements OnStart {
 	onStart() {
@@ -41,6 +51,8 @@ export class Interactable extends BaseComponent<Attributes> implements OnStart {
 
 			if (handle) {
 				proximityPrompt.Parent = handle;
+			} else {
+				Log.Error("A handle could not be found to parent ProximityPrompt to");
 			}
 		} else {
 			proximityPrompt.Parent = this.instance;

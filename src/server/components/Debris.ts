@@ -1,5 +1,6 @@
 import { BaseComponent, Component } from "@flamework/components";
 import { OnStart, OnTick } from "@flamework/core";
+import { Workspace } from "@rbxts/services";
 
 interface Attributes {
 	deleteAfter?: number;
@@ -16,6 +17,10 @@ export class Debris extends BaseComponent<Attributes> implements OnStart, OnTick
 	}
 
 	onTick() {
+		if (this.instance.Parent !== Workspace) {
+			return;
+		}
+
 		if (this.deleteTime === undefined || time() < this.deleteTime) {
 			return;
 		}
