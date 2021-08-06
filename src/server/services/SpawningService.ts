@@ -63,7 +63,7 @@ export class SpawningService implements OnStart, OnTick {
 			}
 		}
 
-		this.spawnRoll = new RandomPicker(structures, weightTable);
+		this.spawnRoll = new RandomPicker([...structures, ReplicatedStorage.assets.Dummy], [...weightTable, 1]);
 	}
 
 	onTick() {
@@ -87,6 +87,10 @@ export class SpawningService implements OnStart, OnTick {
 		const results = Workspace.Raycast(randomPosition, new Vector3(0, -1, 0).mul(100));
 
 		if (results) {
+			if (!CollectionService.HasTag(results.Instance, "SpawnableBlock")) {
+				return;
+			}
+
 			const chosen = this.spawnRoll();
 
 			let yAdjustment = 0;
