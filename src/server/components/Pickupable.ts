@@ -1,6 +1,9 @@
 import { BaseComponent, Component } from "@flamework/components";
 import { OnStart } from "@flamework/core";
-import { RunService } from "@rbxts/services";
+import { PhysicsService, RunService, Workspace } from "@rbxts/services";
+
+PhysicsService.CreateCollisionGroup("ToolPart");
+PhysicsService.CollisionGroupSetCollidable("ToolPart", "Default", false);
 
 interface Attributes {}
 
@@ -25,6 +28,13 @@ export class Pickupable
 		this.maid.GiveTask(
 			this.instance.AncestryChanged.Connect(() => {
 				this.instance.CanBeDropped = false;
+
+				const collisionGroup = this.instance.Parent === Workspace ? "Default" : "ToolPart";
+				for (const descendant of this.instance.GetDescendants()) {
+					if (descendant.IsA("BasePart")) {
+						PhysicsService.SetPartCollisionGroup(descendant, collisionGroup);
+					}
+				}
 			}),
 		);
 
